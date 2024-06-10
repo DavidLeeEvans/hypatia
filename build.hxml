@@ -1,0 +1,7 @@
+-cp src
+-lua main.lua
+-lib hxdefold
+-dce full
+-D analyzer-optimize
+--macro include("", true, null, ["src"])
+#-D hxdefold-scriptdir=scripts

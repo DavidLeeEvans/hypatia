@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "sumneko.lua",
+        "tomblind.local-lua-debugger-vscode",
+        "thejustinwalsh.textproto-grammer",
+        "slevesque.shader",
+        "dtoplak.vscode-glsllint",
+        "koihik.vscode-lua-format",
+        "astronachos.defold"
+    ]
+}

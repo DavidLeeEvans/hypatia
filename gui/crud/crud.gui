@@ -1,0 +1,28 @@
+script: "/scripts/gui/GuiCRUD.gui_script"
+fonts {
+  name: "kenneyblue"
+  font: "/gooey-kenney/fonts/kenneyblue.font"
+}
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "systems"
+  texture: "/assets/images/systems.atlas"
+}
+background_color {
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  w: 0.0
+}
+layers {
+  name: "above"
+}
+layers {
+  name: "below"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
+max_nodes: 512
