@@ -12,7 +12,7 @@ dependencies#7 = https://github.com/defold/extension-camera/archive/master.zip
 dependencies#8 = https://github.com/defold/extension-websocket/archive/master.zip
 
 [bootstrap]
-main_collection = /menus/home.collectionc
+main_collection = /menus/crud.collectionc
 
 [input]
 game_binding = /input/game.input_bindingc
