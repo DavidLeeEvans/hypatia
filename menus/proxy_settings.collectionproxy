@@ -1,1 +1,2 @@
-collection: ""
+collection: "/menus/settings.collection"
+exclude: false

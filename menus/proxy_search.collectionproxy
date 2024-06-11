@@ -1,1 +1,2 @@
-collection: ""
+collection: "/menus/search.collection"
+exclude: false

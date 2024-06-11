@@ -1,1 +1,2 @@
-collection: ""
+collection: "/menus/crud.collection"
+exclude: false

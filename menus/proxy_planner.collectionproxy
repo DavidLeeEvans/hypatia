@@ -1,1 +1,2 @@
-collection: ""
+collection: "/menus/planner.collection"
+exclude: false

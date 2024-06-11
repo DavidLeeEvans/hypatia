@@ -1,1 +1,2 @@
-collection: ""
+collection: "/menus/report.collection"
+exclude: false
