@@ -70,6 +70,16 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 			} else if (Gui.pick_node(self.manufact, action.x, action.y)) {
 				Sound.play("/Sounds#click");
 				on_manufact_press(self);
+			} else if (Gui.pick_node(self.exit, action.x, action.y)) {
+				Sound.play("/Sounds#click");
+				self.state = 0;
+				_add_on_off(self, false);
+				_exit_on_off(self, false);
+				_search_on_off(self, false);
+				//-----------------------
+				_on_off_product(self, true);
+				_on_off_artifact(self, true);
+				_on_off_manufact(self, true);
 			}
 		}
 		return true;
@@ -139,7 +149,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	private final POS_ON_SEARCH = Vmath.vector3(600, 780, 0);
 	private final POS_OFF_SEARCH = Vmath.vector3(1030, 780, 0);
 	//
-	private final POS_ON_EXIT = Vmath.vector3(200, 200, 0);
+	private final POS_ON_EXIT = Vmath.vector3(600, 200, 0);
 	private final POS_OFF_EXIT = Vmath.vector3(1200, 200, 0);
 	//
 	private final POS_ON_PLUS = Vmath.vector3(600, 600, 0);
@@ -153,59 +163,61 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 
 	private function _on_off_product(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
-			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
 			_search_on_off(self, true);
 		} else {
-			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
 			_search_on_off(self, false);
 		}
 	}
 
 	private function _on_off_artifact(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
-			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_ON_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_ON_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
 			_search_on_off(self, true);
 		} else {
-			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
 			_search_on_off(self, false);
 		}
 	}
 
 	private function _on_off_manufact(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
-			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_ON_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_ON_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
 			_search_on_off(self, true);
 		} else {
-			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
 			_search_on_off(self, false);
 		}
 	}
 
 	private function _search_on_off(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
-			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_ON_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_ON_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0, (_, _) -> {});
 		} else {
-			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_OFF_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_OFF_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0, (_, _) -> {});
 		}
 	}
 
 	private function _exit_on_off(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
-			Gui.animate(self.exit, GuiAnimateProprty.PROP_POSITION, POS_ON_EXIT, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			Gui.animate(self.exit, GuiAnimateProprty.PROP_POSITION, POS_ON_EXIT, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0, (_, _) -> {});
 		} else {
-			Gui.animate(self.exit, GuiAnimateProprty.PROP_POSITION, POS_OFF_EXIT, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			Gui.animate(self.exit, GuiAnimateProprty.PROP_POSITION, POS_OFF_EXIT, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0, (_, _) -> {});
 		}
 	}
 
 	private function _add_on_off(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
-			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_ON_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_ON_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0, (_, _) -> {});
 		} else {
-			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_OFF_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_OFF_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0, (_, _) -> {});
 		}
 	}
 
 	private function _subtract_on_off(self:GuiCRUDData, state:Bool):Void {}
 
 	private function _modify_on_off(self:GuiCRUDData, state:Bool):Void {}
+
+	private function _center_on_off(self:GuiCRUDData, state:Bool):Void {}
 }
