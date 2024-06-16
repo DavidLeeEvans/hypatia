@@ -145,9 +145,11 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
-			_add_on_off(self, true);
+			// _add_on_off(self, true);
 		} else {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			_search_on_off(self, false);
+			_add_on_off(self, false);
 		}
 	}
 
