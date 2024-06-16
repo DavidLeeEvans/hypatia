@@ -13,6 +13,8 @@ import defold.types.Url;
 private typedef GuiCRUDData = {
 	var state:Int;
 	//-------
+	var crud_panel:GuiNode;
+	//-------
 	var product:GuiNode;
 	var artifact:GuiNode;
 	var manufact:GuiNode;
@@ -31,9 +33,9 @@ private typedef GuiCRUDData = {
 class GuiCRUD extends GuiScript<GuiCRUDData> {
 	override function init(self:GuiCRUDData) {
 		self.state = 0;
-		// _on_off_product(self, true);
-		// _on_off_artifact(self, true);
-		// _on_off_manufact(self, true);
+		//------------
+		self.crud_panel = Gui.get_node("crud_panel");
+		//------------
 		self.product = Gui.get_node("product");
 		self.artifact = Gui.get_node("artifact");
 		self.manufact = Gui.get_node("manufact");
@@ -83,6 +85,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 			} else if (Gui.pick_node(self.plus, action.x, action.y)) {
 				trace("Plus Pressed");
 				Sound.play("/Sounds#click");
+				Gui.set_enabled(self.crud_panel, false);
 			}
 		}
 		return true;
