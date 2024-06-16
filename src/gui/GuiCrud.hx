@@ -148,6 +148,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	//
 	private final POS_ON_SEARCH = Vmath.vector3(600, 780, 0);
 	private final POS_OFF_SEARCH = Vmath.vector3(1030, 780, 0);
+	// private final POS_OFF_SEARCH = Vmath.vector3(0, 0, 0);
 	//
 	private final POS_ON_EXIT = Vmath.vector3(600, 200, 0);
 	private final POS_OFF_EXIT = Vmath.vector3(1200, 200, 0);
