@@ -20,6 +20,7 @@ private typedef GuiCRUDData = {
 	var search:GuiNode;
 	var plus:GuiNode;
 	var minus:GuiNode;
+	var modify:GuiNode;
 	var exit:GuiNode;
 	//-----text----------
 	var product_label:GuiNode;
@@ -40,6 +41,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		self.search = Gui.get_node("search");
 		self.plus = Gui.get_node("plus");
 		self.minus = Gui.get_node("minus");
+		self.modify = Gui.get_node("modify");
 		self.exit = Gui.get_node("exit");
 		//-------------
 		self.artifact_label = Gui.get_node("artifact_label");
@@ -52,6 +54,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		Gui.set_position(self.search, POS_OFF_SEARCH);
 		Gui.set_position(self.plus, POS_OFF_PLUS);
 		Gui.set_position(self.minus, POS_OFF_MINUS);
+		Gui.set_position(self.modify, POS_OFF_MODIFY);
 		Gui.set_position(self.exit, POS_OFF_EXIT);
 	}
 
@@ -135,13 +138,14 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	private final POS_ON_MINUS = Vmath.vector3(725, 500, 0);
 	private final POS_OFF_MINUS = Vmath.vector3(1030, 500, 0);
 	//
-	private final POS_ON_MODIFY = Vmath.vector3(725, 0, 0);
-	private final POS_OFF_MODIFY = Vmath.vector3(1030, 0, 0);
+	private final POS_ON_MODIFY = Vmath.vector3(725, 400, 0);
+	private final POS_OFF_MODIFY = Vmath.vector3(1030, 400, 0);
 
 	private function _on_off_product(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
+			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 		}
@@ -151,6 +155,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_ON_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
+			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 		}
@@ -160,18 +165,33 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_ON_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
+			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 		}
 	}
 
-	private function _search_on_off(self:GuiCRUDData, state:Bool):Void {}
+	private function _search_on_off(self:GuiCRUDData, state:Bool):Void {
+		if (state) {
+			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_ON_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			_search_on_off(self, true);
+		} else {
+			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_OFF_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+		}
+	}
 
 	private function _exit_on_off(self:GuiCRUDData, state:Bool):Void {}
 
-	private function _add_on_off(self:GuiCRUDData, state:Bool):Void {}
+	private function _add_on_off(self:GuiCRUDData, state:Bool):Void {
+		if (state) {
+			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_ON_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			// dle _search_on_off(self, true);
+		} else {
+			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_OFF_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+		}
+	}
 
 	private function _subtract_on_off(self:GuiCRUDData, state:Bool):Void {}
 
-	private function _edit_on_off(self:GuiCRUDData, state:Bool):Void {}
+	private function _modify_on_off(self:GuiCRUDData, state:Bool):Void {}
 }
