@@ -80,6 +80,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 				_on_off_product(self, true);
 				_on_off_artifact(self, true);
 				_on_off_manufact(self, true);
+			} else if (Gui.pick_node(self.plus, action.x, action.y)) {
+				trace("Plus Pressed");
+				Sound.play("/Sounds#click");
 			}
 		}
 		return true;
@@ -96,7 +99,6 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	override function on_reload(self:GuiCRUDData):Void {}
 
 	private function on_product_press(self:GuiCRUDData):Void {
-		trace('product press');
 		if (self.state == 1)
 			return;
 		self.state = 1;
@@ -109,7 +111,6 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	}
 
 	private function on_artifact_press(self:GuiCRUDData):Void {
-		trace('artifact press');
 		if (self.state == 2)
 			return;
 		self.state = 2;
@@ -122,7 +123,6 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	}
 
 	private function on_manufact_press(self:GuiCRUDData):Void {
-		trace('manufact press');
 		if (self.state == 3)
 			return;
 		self.state = 3;
@@ -147,48 +147,41 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	private final POS_OFF_MANUFACT = Vmath.vector3(1200, 200, 0);
 	//
 	private final POS_ON_SEARCH = Vmath.vector3(600, 780, 0);
-	private final POS_OFF_SEARCH = Vmath.vector3(1030, 780, 0);
-	// private final POS_OFF_SEARCH = Vmath.vector3(0, 0, 0);
+	private final POS_OFF_SEARCH = Vmath.vector3(1200, 780, 0);
 	//
 	private final POS_ON_EXIT = Vmath.vector3(600, 200, 0);
 	private final POS_OFF_EXIT = Vmath.vector3(1200, 200, 0);
 	//
 	private final POS_ON_PLUS = Vmath.vector3(600, 600, 0);
-	private final POS_OFF_PLUS = Vmath.vector3(1030, 600, 0);
+	private final POS_OFF_PLUS = Vmath.vector3(1200, 600, 0);
 	//
 	private final POS_ON_MINUS = Vmath.vector3(725, 500, 0);
-	private final POS_OFF_MINUS = Vmath.vector3(1030, 500, 0);
+	private final POS_OFF_MINUS = Vmath.vector3(1200, 500, 0);
 	//
 	private final POS_ON_MODIFY = Vmath.vector3(725, 400, 0);
-	private final POS_OFF_MODIFY = Vmath.vector3(1030, 400, 0);
+	private final POS_OFF_MODIFY = Vmath.vector3(1200, 400, 0);
 
 	private function _on_off_product(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
-			_search_on_off(self, true);
 		} else {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
-			_search_on_off(self, false);
 		}
 	}
 
 	private function _on_off_artifact(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_ON_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
-			_search_on_off(self, true);
 		} else {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
-			_search_on_off(self, false);
 		}
 	}
 
 	private function _on_off_manufact(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_ON_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
-			_search_on_off(self, true);
 		} else {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0, (_, _) -> {});
-			_search_on_off(self, false);
 		}
 	}
 
