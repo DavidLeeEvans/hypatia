@@ -192,7 +192,6 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	private function _add_on_off(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
 			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_ON_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
-			// dle _search_on_off(self, true);
 		} else {
 			Gui.animate(self.plus, GuiAnimateProprty.PROP_POSITION, POS_OFF_PLUS, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
 		}
