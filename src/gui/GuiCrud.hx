@@ -158,6 +158,8 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			_search_on_off(self, false);
+			_add_on_off(self, false);
 		}
 	}
 
@@ -168,6 +170,8 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			_search_on_off(self, false);
+			_add_on_off(self, false);
 		}
 	}
 
@@ -175,8 +179,11 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_ON_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
+			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_OFF_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+			_search_on_off(self, false);
+			_add_on_off(self, false);
 		}
 	}
 
