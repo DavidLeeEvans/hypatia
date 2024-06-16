@@ -169,7 +169,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "ARTIFACT"
   font: "kenneyblue"
-  id: "artifact_lable"
+  id: "artifact_label"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -297,7 +297,7 @@ nodes {
   "_LABEL\n"
   ""
   font: "kenneyblue"
-  id: "manufact_lable"
+  id: "manufact_label"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -525,7 +525,7 @@ nodes {
   text: "PRODUCT_LABEL\n"
   ""
   font: "kenneyblue"
-  id: "product_lable"
+  id: "product_label"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
