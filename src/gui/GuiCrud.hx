@@ -47,6 +47,7 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		self.artifact_label = Gui.get_node("artifact_label");
 		self.manufact_label = Gui.get_node("manufact_label");
 		self.product_label = Gui.get_node("product_label");
+		//-------------
 		Gui.set_position(self.product, POS_ON_PRODUCT);
 		Gui.set_position(self.artifact, POS_ON_ARTIFACT);
 		Gui.set_position(self.manufact, POS_ON_MANUFACT);
@@ -92,6 +93,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		_on_off_product(self, true);
 		_on_off_artifact(self, false);
 		_on_off_manufact(self, false);
+		_add_on_off(self, true);
+		_search_on_off(self, true);
+		_exit_on_off(self, true);
 	}
 
 	private function on_artifact_press(self:GuiCRUDData):Void {
@@ -102,6 +106,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		_on_off_product(self, false);
 		_on_off_artifact(self, true);
 		_on_off_manufact(self, false);
+		_add_on_off(self, true);
+		_search_on_off(self, true);
+		_exit_on_off(self, true);
 	}
 
 	private function on_manufact_press(self:GuiCRUDData):Void {
@@ -112,6 +119,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		_on_off_product(self, false);
 		_on_off_artifact(self, false);
 		_on_off_manufact(self, true);
+		_add_on_off(self, true);
+		_search_on_off(self, true);
+		_exit_on_off(self, true);
 	}
 
 	private final ANIMAT_DURATION = 1.0;
@@ -129,10 +139,10 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 	private final POS_ON_SEARCH = Vmath.vector3(600, 780, 0);
 	private final POS_OFF_SEARCH = Vmath.vector3(1030, 780, 0);
 	//
-	private final POS_ON_EXIT = Vmath.vector3(725, 675, 0);
-	private final POS_OFF_EXIT = Vmath.vector3(1030, 675, 0);
+	private final POS_ON_EXIT = Vmath.vector3(725, 200, 0);
+	private final POS_OFF_EXIT = Vmath.vector3(1030, 200, 0);
 	//
-	private final POS_ON_PLUS = Vmath.vector3(725, 600, 0);
+	private final POS_ON_PLUS = Vmath.vector3(600, 600, 0);
 	private final POS_OFF_PLUS = Vmath.vector3(1030, 600, 0);
 	//
 	private final POS_ON_MINUS = Vmath.vector3(725, 500, 0);
@@ -145,11 +155,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
-			// _add_on_off(self, true);
 		} else {
 			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, false);
-			_add_on_off(self, false);
 		}
 	}
 
@@ -157,11 +165,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_ON_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
-			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, false);
-			_add_on_off(self, false);
 		}
 	}
 
@@ -169,27 +175,27 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (state) {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_ON_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, true);
-			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
 			_search_on_off(self, false);
-			_add_on_off(self, false);
 		}
 	}
 
 	private function _search_on_off(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
 			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_ON_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
-			_search_on_off(self, true);
-			_add_on_off(self, true);
 		} else {
 			Gui.animate(self.search, GuiAnimateProprty.PROP_POSITION, POS_OFF_SEARCH, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
-			_search_on_off(self, false);
-			_add_on_off(self, false);
 		}
 	}
 
-	private function _exit_on_off(self:GuiCRUDData, state:Bool):Void {}
+	private function _exit_on_off(self:GuiCRUDData, state:Bool):Void {
+		if (state) {
+			Gui.animate(self.exit, GuiAnimateProprty.PROP_POSITION, POS_ON_EXIT, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+		} else {
+			Gui.animate(self.exit, GuiAnimateProprty.PROP_POSITION, POS_OFF_EXIT, GuiEasing.EASING_LINEAR, MINOR_ANIMAT_DURATION, 0);
+		}
+	}
 
 	private function _add_on_off(self:GuiCRUDData, state:Bool):Void {
 		if (state) {
