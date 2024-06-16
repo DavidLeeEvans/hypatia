@@ -3,6 +3,7 @@ package gui;
 import Defold.hash;
 import defold.Gui;
 import defold.Sound;
+import defold.Vmath;
 import defold.support.GuiScript;
 import defold.support.ScriptOnInputAction;
 import defold.types.Hash;
@@ -29,6 +30,9 @@ private typedef GuiCRUDData = {
 class GuiCRUD extends GuiScript<GuiCRUDData> {
 	override function init(self:GuiCRUDData) {
 		self.state = 0;
+		// _on_off_product(self, true);
+		// _on_off_artifact(self, true);
+		// _on_off_manufact(self, true);
 		self.product = Gui.get_node("product");
 		self.artifact = Gui.get_node("artifact");
 		self.manufact = Gui.get_node("manufact");
@@ -41,6 +45,14 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		self.artifact_label = Gui.get_node("artifact_label");
 		self.manufact_label = Gui.get_node("manufact_label");
 		self.product_label = Gui.get_node("product_label");
+		Gui.set_position(self.product, POS_ON_PRODUCT);
+		Gui.set_position(self.artifact, POS_ON_ARTIFACT);
+		Gui.set_position(self.manufact, POS_ON_MANUFACT);
+		//
+		Gui.set_position(self.search, POS_OFF_SEARCH);
+		Gui.set_position(self.plus, POS_OFF_PLUS);
+		Gui.set_position(self.minus, POS_OFF_MINUS);
+		Gui.set_position(self.exit, POS_OFF_EXIT);
 	}
 
 	override function on_input(self:GuiCRUDData, action_id:Hash, action:ScriptOnInputAction):Bool {
@@ -75,8 +87,8 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 			return;
 		self.state = 1;
 		_on_off_product(self, true);
-		_on_off_product(self, true);
-		_on_off_product(self, true);
+		_on_off_artifact(self, false);
+		_on_off_manufact(self, false);
 	}
 
 	private function on_artifact_press(self:GuiCRUDData):Void {
@@ -84,9 +96,9 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (self.state == 2)
 			return;
 		self.state = 2;
-		_on_off_product(self, true);
-		_on_off_product(self, true);
-		_on_off_product(self, true);
+		_on_off_product(self, false);
+		_on_off_artifact(self, true);
+		_on_off_manufact(self, false);
 	}
 
 	private function on_manufact_press(self:GuiCRUDData):Void {
@@ -94,14 +106,72 @@ class GuiCRUD extends GuiScript<GuiCRUDData> {
 		if (self.state == 3)
 			return;
 		self.state = 3;
-		_on_off_product(self, true);
-		_on_off_product(self, true);
-		_on_off_product(self, true);
+		_on_off_product(self, false);
+		_on_off_artifact(self, false);
+		_on_off_manufact(self, true);
 	}
 
-	private function _on_off_product(self:GuiCRUDData, state:Bool):Void {}
+	private final ANIMAT_DURATION = 1.0;
+	private final MINOR_ANIMAT_DURATION = 0.6;
+	//
+	private final POS_ON_PRODUCT = Vmath.vector3(200, 700, 0);
+	private final POS_OFF_PRODUCT = Vmath.vector3(1200, 700, 0);
+	//
+	private final POS_ON_ARTIFACT = Vmath.vector3(200, 500, 0);
+	private final POS_OFF_ARTIFACT = Vmath.vector3(1200, 500, 0);
+	//
+	private final POS_ON_MANUFACT = Vmath.vector3(200, 200, 0);
+	private final POS_OFF_MANUFACT = Vmath.vector3(1200, 200, 0);
+	//
+	private final POS_ON_SEARCH = Vmath.vector3(600, 780, 0);
+	private final POS_OFF_SEARCH = Vmath.vector3(1030, 780, 0);
+	//
+	private final POS_ON_EXIT = Vmath.vector3(725, 675, 0);
+	private final POS_OFF_EXIT = Vmath.vector3(1030, 675, 0);
+	//
+	private final POS_ON_PLUS = Vmath.vector3(725, 600, 0);
+	private final POS_OFF_PLUS = Vmath.vector3(1030, 600, 0);
+	//
+	private final POS_ON_MINUS = Vmath.vector3(725, 500, 0);
+	private final POS_OFF_MINUS = Vmath.vector3(1030, 500, 0);
+	//
+	private final POS_ON_MODIFY = Vmath.vector3(725, 0, 0);
+	private final POS_OFF_MODIFY = Vmath.vector3(1030, 0, 0);
 
-	private function _on_off_artifact(self:GuiCRUDData, state:Bool):Void {}
+	private function _on_off_product(self:GuiCRUDData, state:Bool):Void {
+		if (state) {
+			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_ON_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			_search_on_off(self, true);
+		} else {
+			Gui.animate(self.product, GuiAnimateProprty.PROP_POSITION, POS_OFF_PRODUCT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+		}
+	}
 
-	private function _on_off_manufact(self:GuiCRUDData, state:Bool):Void {}
+	private function _on_off_artifact(self:GuiCRUDData, state:Bool):Void {
+		if (state) {
+			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_ON_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			_search_on_off(self, true);
+		} else {
+			Gui.animate(self.artifact, GuiAnimateProprty.PROP_POSITION, POS_OFF_ARTIFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+		}
+	}
+
+	private function _on_off_manufact(self:GuiCRUDData, state:Bool):Void {
+		if (state) {
+			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_ON_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+			_search_on_off(self, true);
+		} else {
+			Gui.animate(self.manufact, GuiAnimateProprty.PROP_POSITION, POS_OFF_MANUFACT, GuiEasing.EASING_LINEAR, ANIMAT_DURATION, 0);
+		}
+	}
+
+	private function _search_on_off(self:GuiCRUDData, state:Bool):Void {}
+
+	private function _exit_on_off(self:GuiCRUDData, state:Bool):Void {}
+
+	private function _add_on_off(self:GuiCRUDData, state:Bool):Void {}
+
+	private function _subtract_on_off(self:GuiCRUDData, state:Bool):Void {}
+
+	private function _edit_on_off(self:GuiCRUDData, state:Bool):Void {}
 }
